@@ -1,0 +1,46 @@
+"""
+Задача: Обработчик списков с числами
+Напишите функцию, которая выполняет несколько операций над списком чисел:
+1. Удаляет дубликаты
+2. Сортирует по возрастанию
+3. Фильтрует числа больше threshold
+4. Возвращает кортеж (обработанный_список, сумма, среднее)
+"""
+
+def process_numbers(numbers, threshold=10):
+
+    # Удаляем дубликаты через преобразование в множество
+    unique_numbers = list(set(numbers))
+    
+    # Сортируем
+    unique_numbers.sort()
+    
+    # Фильтруем числа больше порога
+    filtered = [num for num in unique_numbers if num > threshold]
+    
+    # Считаем сумму и среднее
+    total = sum(filtered) if filtered else 0
+    average = total / len(filtered) if filtered else 0
+    
+    return filtered, total, average
+
+
+# Тестирование
+if __name__ == "__main__":
+    # Тест 1: Базовый тест
+    test1 = [3, 1, 4, 1, 5, 9, 2, 6, 5]
+    result1 = process_numbers(test1, 5)
+    print(f"Тест 1: {result1}")
+    # Ожидаем: ([6, 9], 15, 7.5)
+    
+    # Тест 2: Пустой результат
+    test2 = [1, 2, 3]
+    result2 = process_numbers(test2, 10)
+    print(f"Тест 2: {result2}")
+    # Ожидаем: ([], 0, 0)
+    
+    # Тест 3: С отрицательными числами
+    test3 = [-5, 0, 15, -3, 15, 20]
+    result3 = process_numbers(test3, 0)
+    print(f"Тест 3: {result3}")
+    # Ожидаем: ([15, 20], 35, 17.5)
