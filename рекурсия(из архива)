@@ -1,0 +1,108 @@
+(1):
+a = [0] * 200
+a[1] = 1
+for i in range (2, 129):
+    a[i] = a[i - 1] + a[i -4]
+print( a[128] ) #326671493536033573
+
+
+(1.2):
+from functools import lru_cache
+@lru_cache(None)
+def f(start, finish):
+    if (start == finish):
+        return 1
+    if (start > finish):
+        return 0
+    x = f(start + 1, finish)
+    t = f(start + 4, finish)
+    return x + t
+print( f(1, 128) ) #326671493536033573
+
+
+(2.1):
+def f(start, finish):
+	if (start == finish):
+     		return 1
+     	if (start > finish):
+        	return 0
+     	x = f( start + 1, finish)
+     	t = f(start * 4, finish)
+     	return x + t
+print( f(1, 55) ) #32
+
+
+(2.2):
+a = [0] * 100
+a[1] = 1
+for i in range (2, 56):
+	if i % 4 == 0:
+        	a[i] = a[i - 1] + a[i // 4]
+     	else:
+        	a[i] = a[i - 1]
+print( a[55] ) #32
+
+
+(3):
+def f(start, finish):
+    if (start == finish):
+        return 1
+    if (start < finish):
+        return 0
+    x = f(start - 1, finish)
+    y = f(start - 3, finish)
+    z = f(start // 3, finish)
+    return x + y + z
+print( f( 22, 2 ) ) #2196
+
+
+(4):
+def f(start, finish):
+    if (start == finish):
+        return 1
+    if (start > finish):
+        return 0
+    x = f(start + 2, finish)
+    u = f(start + 3, finish)
+    t = f(start * 2, finish)
+    return x + u + t
+#print( f(3, 8)*f(8, 18) ) #24
+
+
+(7):
+from functools import lru_cache
+@lru_cache(None)
+def f(start, finish):
+    if (start == finish):
+        return 1
+    if (start > finish):
+        return 0
+    if (start == 5):
+        return 0
+    if (start == 17):
+        return 0
+    if (start == 35):
+        return 0
+    x = f(start + 1, finish)
+    y = f(start + 3, finish)
+    t = f(start * 2, finish)
+    n = f(start * 3, finish)
+    return x + y + t + n
+print( f(3, 45) ) #1278967
+
+
+(8):
+from functools import lru_cache
+@lru_cache(None)
+def f(start, finish):
+    if (start == finish):
+        return 1
+    if (start > finish):
+        return 0
+    if (start == 16):
+        return 0
+    x = f(start + 1, finish)
+    t = f(start * 2, finish)
+    n = f(start * 3, finish)
+    return x + t + n
+print( f(1, 14)*f(14, 50) ) #192
